@@ -128,26 +128,17 @@
         };
 
         try {
-          const response = await fetch('https://sheetdb.io/api/v1/pwyav7po06boi', {
+          const response = await fetch("https://airtable.com/appl3fbuiFgmdr0yG/api/docs", {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+              "Authorization": "Bearer patzXHbmnyeMuNt9x.4979d652aab85e9cac91946d2916a62f684b4bd53f4af2578d6140343cf2925f",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({ data })
-          });
-
-          if (response.ok) {
-            form.successMessage.classList.remove('hidden');
-            form.name.value = '';
-            form.mood.value = '';
-            form.comments.value = '';
-            moodButtons.forEach(btn => btn.classList.remove('selected'));
-            setTimeout(() => form.successMessage.classList.add('hidden'), 3000);
-          } else {
-            form.errorMessage.classList.remove('hidden');
-          }
-        } catch (error) {
-          form.errorMessage.classList.remove('hidden');
+            body: JSON.stringify({
+              fields: {
+                Name: data.name,
+                Mood: data.mood,
+                Comments: data.comments
         }
       }
     });

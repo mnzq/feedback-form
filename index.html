@@ -56,9 +56,9 @@
       <div class="text-center">
         <p class="text-lg font-medium text-indigo-700 mb-3">What's your mood?</p>
         <div class="flex justify-center gap-6 sm:gap-8">
-          <button type="button" class="mood-btn bad p-3" data-mood="bad" title="Bad">😞</button>
-          <button type="button" class="mood-btn meh p-3" data-mood="meh" title="Meh">😐</button>
-          <button type="button" class="mood-btn good p-3" data-mood="good" title="Good">😊</button>
+          <button type="button" class="mood-btn bad p-3" data-mood="Bad" title="Bad">😞</button>
+          <button type="button" class="mood-btn meh p-3" data-mood="Meh" title="Meh">😐</button>
+          <button type="button" class="mood-btn good p-3" data-mood="Good" title="Good">😊</button>
         </div>
         <p id="mood-error" class="error-message hidden text-center">Please pick a mood!</p>
         <input type="hidden" id="mood" name="mood" />
@@ -132,33 +132,33 @@
             method: 'POST',
             headers: {
               "Authorization": "Bearer patzXHbmnyeMuNt9x.4979d652aab85e9cac91946d2916a62f684b4bd53f4af2578d6140343cf2925f",
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({
               fields: {
                 Name: data.name,
                 Mood: data.mood,
                 Comments: data.comments
+              }
+            })
+          });
+
+          if (response.ok) {
+            form.successMessage.classList.remove('hidden');
+            form.name.value = '';
+            form.mood.value = '';
+            form.comments.value = '';
+            moodButtons.forEach(btn => btn.classList.remove('selected'));
+            setTimeout(() => form.successMessage.classList.add('hidden'), 3000);
+          } else {
+            form.errorMessage.classList.remove('hidden');
+          }
+        } catch (error) {
+          form.errorMessage.classList.remove('hidden');
+          console.error("Error:", error);
         }
       }
     });
-
-        if (response.ok) {
-        form.successMessage.classList.remove('hidden');
-        form.name.value = '';
-        form.mood.value = '';
-        form.comments.value = '';
-        moodButtons.forEach(btn => btn.classList.remove('selected'));
-        setTimeout(() => form.successMessage.classList.add('hidden'), 3000);
-      } else {
-        form.errorMessage.classList.remove('hidden');
-      }
-    } catch (error) {
-      form.errorMessage.classList.remove('hidden');
-      console.error("Error:", error);
-    }
-  }
-});
   </script>
 </body>
 </html>
